@@ -1,6 +1,11 @@
 
 package com.pluralsight;
 
+import javax.imageio.IIOException;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,8 +61,30 @@ public class Store {
      * A17|Wireless Mouse|19.99
      */
     public static void loadInventory(String fileName, ArrayList<Product> inventory) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length >= 3) {
+                    String id = parts[0].trim();
+                    String name = parts[1].trim();
+                    double price = Double.parseDouble(parts[2].trim());
+                    inventory.add(new Product(id,name,price));
+
+                }
+
+            }
+
+        } catch (IIOException e) {
+            System.out.println("Error" + e.getMessage());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         // TODO: read each line, split on "|",
         //       create a Product object, and add it to the inventory list
+
     }
 
     /**
