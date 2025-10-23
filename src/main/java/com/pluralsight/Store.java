@@ -103,7 +103,7 @@ public class Store {
             System.out.println(p);
         }
 
-        System.out.println("X to go back ");
+        System.out.println(" --- Enter the product ID to add to your cart or X to go back ---");
         String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("X")) {
             return;
@@ -119,8 +119,6 @@ public class Store {
 
         }
 
-
-
     // TODO: show each product (id, name, price),
     //       prompt for an id, find that product, add to cart
 
@@ -132,7 +130,8 @@ public class Store {
     public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
         if (cart.isEmpty()) {
             System.out.println("~~~~~~~~~~Cart Empty~~~~~~~~~~");
-            return;}
+            return;
+        }
         System.out.println("~~~~~~~~~~Your Cart~~~~~~~~~~");
         double total = 0;
         for (Product p : cart) {
@@ -143,7 +142,7 @@ public class Store {
         System.out.print("Enter C to checkout or X to return:");
         String choice = scanner.nextLine().trim();
 
-        if (choice.equalsIgnoreCase("C")) {
+            if (choice.equalsIgnoreCase("C")) {
             checkOut(cart, total, scanner);
         }
 
@@ -175,6 +174,12 @@ public class Store {
      */
     public static Product findProductById(String id, ArrayList<Product> inventory) {
         // TODO: loop over the list and compare ids
+        for (Product p : inventory) {
+            if (p.getId().equalsIgnoreCase(id)) {
+                return p;
+
+            }
+        }
         return null;
     }
 }
