@@ -103,7 +103,7 @@ public class Store {
             System.out.println(p);
         }
 
-        System.out.println("Enter ID Product to add to your cart (or X to go back) ");
+        System.out.println("X to go back ");
         String choice = scanner.nextLine();
             if (choice.equalsIgnoreCase("X")) {
             return;
@@ -113,68 +113,70 @@ public class Store {
             if (product == null) {
             System.out.println("Not Found");
         } else {
-            cart.add(product);
-            System.out.println(product.getName() + "Added to your cart :)");
+                cart.add(product);
+                System.out.println(product.getName() + " Added to your cart :)");
+            }
+
         }
 
 
-    }
+
     // TODO: show each product (id, name, price),
     //       prompt for an id, find that product, add to cart
-}
 
-/**
- * Shows the contents of the cart, calculates the total,
- * and offers the option to check out.
- */
-public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
-    if (cart.isEmpty()) {
-        System.out.println("~~~~~~~~~~Cart Empty~~~~~~~~~~");
-        return;}
-    System.out.println("~~~~~~~~~~Your Cart~~~~~~~~~~");
-    double total = 0;
-    for (Product p : cart) {
-        System.out.println("%s | %s | $%.2f%n, p.getId(), p.getName(), p.getPrice()");
-        total += p.getPrice();
+
+    /**
+     * Shows the contents of the cart, calculates the total,
+     * and offers the option to check out.
+     */
+    public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
+        if (cart.isEmpty()) {
+            System.out.println("~~~~~~~~~~Cart Empty~~~~~~~~~~");
+            return;}
+        System.out.println("~~~~~~~~~~Your Cart~~~~~~~~~~");
+        double total = 0;
+        for (Product p : cart) {
+            System.out.println("%s | %s | $%.2f%n, p.getId(), p.getName(), p.getPrice()");
+            total += p.getPrice();
+        }
+        System.out.println("Total: $" + total);
+        System.out.print("Enter C to checkout or X to return:");
+        String choice = scanner.nextLine().trim();
+
+        if (choice.equalsIgnoreCase("C")) {
+            checkOut(cart, total, scanner);
+        }
+
+
+        // TODO:
+        //   • list each product in the cart
+        //   • compute the total cost
+        //   • ask the user whether to check out (C) or return (X)
+        //   • if C, call checkOut(cart, totalAmount, scanner)
     }
-    System.out.println("Total: $" + total);
-    System.out.print("Enter C to checkout or X to return:");
-    String choice = scanner.nextLine().trim();
 
-    if (choice.equalsIgnoreCase("C")) {
-        checkOut(cart, total, scanner);
+    /**
+     * Handles the checkout process:
+     * 1. Confirm that the user wants to buy.
+     * 2. Accept payment and calculate change.
+     * 3. Display a simple receipt.
+     * 4. Clear the cart.
+     */
+    public static void checkOut(ArrayList<Product> cart,
+                                double totalAmount,
+                                Scanner scanner) {
+        // TODO: implement steps listed above
     }
 
-
-    // TODO:
-    //   • list each product in the cart
-    //   • compute the total cost
-    //   • ask the user whether to check out (C) or return (X)
-    //   • if C, call checkOut(cart, totalAmount, scanner)
-}
-
-/**
- * Handles the checkout process:
- * 1. Confirm that the user wants to buy.
- * 2. Accept payment and calculate change.
- * 3. Display a simple receipt.
- * 4. Clear the cart.
- */
-public static void checkOut(ArrayList<Product> cart,
-                            double totalAmount,
-                            Scanner scanner) {
-    // TODO: implement steps listed above
-}
-
-/**
- * Searches a list for a product by its id.
- *
- * @return the matching Product, or null if not found
- */
-public static Product findProductById(String id, ArrayList<Product> inventory) {
-    // TODO: loop over the list and compare ids
-    return null;
-}
+    /**
+     * Searches a list for a product by its id.
+     *
+     * @return the matching Product, or null if not found
+     */
+    public static Product findProductById(String id, ArrayList<Product> inventory) {
+        // TODO: loop over the list and compare ids
+        return null;
+    }
 }
 
 
