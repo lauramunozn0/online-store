@@ -129,13 +129,13 @@ public class Store {
      */
     public static void displayCart(ArrayList<Product> cart, Scanner scanner) {
         if (cart.isEmpty()) {
-            System.out.println("~~~~~~~~~~Cart Empty~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~ Cart Empty ~~~~~~~~~~");
             return;
         }
-        System.out.println("~~~~~~~~~~Your Cart~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~ Your Cart ~~~~~~~~~~");
         double total = 0;
         for (Product p : cart) {
-            System.out.println("%s | %s | $%.2f%n, p.getId(), p.getName(), p.getPrice()");
+            System.out.printf("%s | %s | $%.2f%n",p.getId(), p.getName(), p.getPrice());
             total += p.getPrice();
         }
         System.out.println("Total: $" + total);
@@ -164,6 +164,17 @@ public class Store {
     public static void checkOut(ArrayList<Product> cart,
                                 double totalAmount,
                                 Scanner scanner) {
+        System.out.printf("Your total is $%.2f%n", totalAmount);
+        System.out.println("Please Enter payment amount :) ");
+        double payment = scanner.nextDouble();
+        scanner.nextLine();
+
+        if (payment < totalAmount) {
+            System.out.println("Transaction Cancelled! Not Enough");
+            return;
+        }
+
+
         // TODO: implement steps listed above
     }
 
