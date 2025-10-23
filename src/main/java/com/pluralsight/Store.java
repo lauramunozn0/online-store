@@ -105,20 +105,19 @@ public class Store {
 
         System.out.println(" --- Enter the product ID to add to your cart or X to go back ---");
         String choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("X")) {
+        if (choice.equalsIgnoreCase("X")) {
             return;
         }
-        Product product = findProductById(choice,inventory);
+        Product product = findProductById(choice, inventory);
 
-            if (product == null) {
+        if (product == null) {
             System.out.println("Not Found");
         } else {
-                cart.add(product);
-                System.out.println(product.getName() + " Added to your cart :)");
-            }
-
+            cart.add(product);
+            System.out.println(product.getName() + " Added to your cart :)");
         }
 
+    }
     // TODO: show each product (id, name, price),
     //       prompt for an id, find that product, add to cart
 
@@ -165,9 +164,23 @@ public class Store {
                                 double totalAmount,
                                 Scanner scanner) {
         System.out.printf("Your total is $%.2f%n", totalAmount);
-        System.out.println("Please Enter payment amount :) ");
-        double payment = scanner.nextDouble();
-        scanner.nextLine();
+
+        double payment = 0;
+        boolean validPayment = false;
+
+        while (!validPayment) {
+            System.out.print("Please Enter payment amount :) ");
+            String input = scanner.nextLine().replace("$", "").trim();
+
+            try {
+                payment = Double.parseDouble(input);
+                validPayment = true;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
+            }
+        }
+
 
         if (payment < totalAmount) {
             System.out.println("Transaction Cancelled! Not Enough");
@@ -175,7 +188,7 @@ public class Store {
         }
 
         double change = payment - totalAmount;
-        System.out.println( "~~~~~~~Your Receipt!! :) ~~~~~~~~~~~~");
+        System.out.println("~~~~~~~Your Receipt!! :) ~~~~~~~~~~~~");
         for (Product p : cart) {
             System.out.printf("%s | %s | $%.2f%n", p.getId(), p.getName(), p.getPrice());
 
@@ -183,27 +196,22 @@ public class Store {
             System.out.printf("Payment: $%.2f%n", payment);
             System.out.printf("Change: $%.2f%n", change);
             System.out.println("~~~~~~~~~~ Thank You! Come Again<3 ~~~~~~~~~~");
-
+        }
             cart.clear();
-        }
 
     }
 
-    /**
-     * Searches a list for a product by its id.
-     *
-     * @return the matching Product, or null if not found
-     */
-    public static Product findProductById(String id, ArrayList<Product> inventory) {
-        // TODO: loop over the list and compare ids
-        for (Product p : inventory) {
-            if (p.getId().equalsIgnoreCase(id)) {
-                return p;
 
+
+            public static Product findProductById(String id, ArrayList < Product > inventory){
+                for (Product p : inventory) {
+                    if (p.getId().equalsIgnoreCase(id)) {
+                        return p;
+                    }
+                }return null;
             }
-        }
-        return null;
-    }
+
 }
+
 
 
