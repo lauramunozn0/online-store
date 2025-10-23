@@ -174,6 +174,18 @@ public class Store {
             return;
         }
 
+        double change = payment - totalAmount;
+        System.out.println( "~~~~~~~Your Receipt!! :) ~~~~~~~~~~~~");
+        for (Product p : cart) {
+            System.out.printf("%s | %s | $%.2f%n", p.getId(), p.getName(), p.getPrice());
+
+            System.out.printf("Total: $%.2f%n", totalAmount);
+            System.out.printf("Payment: $%.2f%n", payment);
+            System.out.printf("Change: $%.2f%n", change);
+            System.out.println("~~~~~~~~~~ Thank You! Come Again<3 ~~~~~~~~~~");
+
+            cart.clear();
+        }
 
         // TODO: implement steps listed above
     }
