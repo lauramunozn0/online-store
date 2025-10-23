@@ -187,7 +187,6 @@ public class Store {
             cart.clear();
         }
 
-        // TODO: implement steps listed above
     }
 
     /**
